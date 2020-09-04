@@ -88,16 +88,16 @@ class Solution(object):
         self.pp.change_solution_temperature(self.number, to_temperature)
         return self
 
-    def total_old(self, element, units='mmol'):
-        """ Returns to total of any given species or element (SLOW!) """
-        total = 0
-        regexp = "(^|[^A-Z])"+element
-        for species, amount in self.species.items():
-            if re.search(regexp, species):
-                total += convert_units(element, amount, to_units=units)
-        return total
+    # def total_old(self, element, units='mmol'):
+    #     """ Returns to total of any given species or element (SLOW!) """
+    #     total = 0
+    #     regexp = "(^|[^A-Z])"+element
+    #     for species, amount in self.species.items():
+    #         if re.search(regexp, species):
+    #             total += convert_units(element, amount, to_units=units)
+    #     return total
     
-    def total_new(self, element, units='mmol'):
+    def total(self, element, units='mmol'):
         values = [value for key, value in self.species.items() if element in key]
         total = reduce(lambda x,y: x+y, values)
         return convert_units(element, total, to_units=units)
